@@ -1,5 +1,4 @@
-# 프로젝트 제목
-
+# teleHealthCare
 ## 1. 개요
  - 비대면 의료 서비스에 필요한 기본 기능 구현 연습
  - python django djangoRestFramework 시도
@@ -23,3 +22,6 @@
 ## 3. 프로그램 실행 방법
  - 데이터 입력 방법
  - 로직별 실행 방법
+
+## 4. Database
+![image](https://github.com/backEndKwon/teleHealthCare/assets/128948886/67a7f3e7-f761-4da2-8f15-dab7eeb54898)
