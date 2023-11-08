@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     #여기에 추가된 app과 rest_framework를 추가하기
     'rest_framework',
     'patients',
+    'doctors'
 ]
 
 MIDDLEWARE = [
