@@ -24,4 +24,4 @@
  - 로직별 실행 방법
 
 ## 4. Database
-![image](https://github.com/backEndKwon/teleHealthCare/assets/128948886/67a7f3e7-f761-4da2-8f15-dab7eeb54898)
+ ![image](https://github.com/backEndKwon/teleHealthCare/assets/128948886/36786bb7-ebb3-4025-a502-0967307602f0)
