@@ -34,6 +34,7 @@ def isWithinWorkingHours(user_time, working_hours, lunch_hours):
 
 
 #treatment api에 사용
+## 주요예외사항 = 영업시간 끝나기 20분전 요청이 들어왔을 경우
 def calculateExpirationDate(rez_date, doctor):
     # 의사의 영업시간과 점심시간을 시간 형태로 변환
     working_days = doctor.time_business.split('/')
@@ -58,6 +59,11 @@ def calculateExpirationDate(rez_date, doctor):
         # 진료요청 시간이 점심시간 동안인 경우
         else:
             expiration_date = datetime(rez_date.year, rez_date.month, rez_date.day, lunch_hours[1], 15)
+        # 만료 시간이 영업 종료 시간을 넘어가는 경우
+        if expiration_date.time().hour >= working_hours[1]:
+            remaining_minutes = (expiration_date - datetime(rez_date.year, rez_date.month, rez_date.day, working_hours[1], 0)).seconds // 60
+            next_working_day = (rez_date + timedelta(days=1)).replace(hour=working_hours[0], minute=remaining_minutes)
+            expiration_date = next_working_day
     # 진료요청 시간이 의사의 근무시간 외인 경우
     else:
         # 다음 근무일을 계산
@@ -65,6 +71,7 @@ def calculateExpirationDate(rez_date, doctor):
         expiration_date = next_working_day
 
     return expiration_date
+
 
 
 
