@@ -64,7 +64,7 @@ class TreatmentViewSet(viewsets.ModelViewSet):
         return Response(serializer.data)
     
     # treatments/{treatmentId}/acceptTreatment/
-    @action(detail = True, methods=['POST'])
+    @action(detail = True, methods=['PUT']) #PUT,PATCH = detail=True
     def acceptTreatment(self, request, pk=None):
         treatment = self.get_object() #treatmentId로 treatment객체 가져오기
         
@@ -80,4 +80,15 @@ class TreatmentViewSet(viewsets.ModelViewSet):
         treatment.save()
         
         serializer = self.get_serializer(treatment)
+        return Response(serializer.data)
+    
+    #doctorId로 isAccepted가 False인 treatment들을 가져오기
+    @action(detail=False, methods=['GET'])
+    def search(self, request):
+        doctor_id = request.query_params.get('doctorId', None)
+        if not doctor_id:
+            return Response({'message': 'doctorId를 입력하세요.'})
+
+        treatments = self.queryset.filter(doctor_id=doctor_id, isAccepted=False)
+        serializer = self.get_serializer(treatments, many=True)
         return Response(serializer.data)
