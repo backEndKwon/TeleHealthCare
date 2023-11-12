@@ -7,10 +7,10 @@ from rest_framework.decorators import action
 from django.db.models import Q
 from rest_framework.response import Response
 from datetime import datetime
-from teleHealthCare.utils import isWithinWorkingHours, convertTimeFormat
+from teleHealthCare.utils import isWithinWorkingHours_doctor, convertTimeFormat
 # Create your views here.
 
-class doctorViewSet(viewsets.GenericViewSet):
+class DoctorViewSet(viewsets.ModelViewSet):
     queryset = Doctor.objects.all()
     serializer_class = DoctorSerializer
 
@@ -67,7 +67,7 @@ class doctorViewSet(viewsets.GenericViewSet):
             user_time = datetime_obj.time().hour
 
             doctors = Doctor.objects.all()
-            available_doctors = [doctor for doctor in doctors if isWithinWorkingHours(user_time, doctor.time_business.split('/')[weekday], doctor.time_lunch)]
+            available_doctors = [doctor for doctor in doctors if isWithinWorkingHours_doctor(user_time, doctor.time_business.split('/')[weekday], doctor.time_lunch)]
             print("available_doctors: ", available_doctors)
             
             if not available_doctors:
