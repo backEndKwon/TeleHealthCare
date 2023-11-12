@@ -62,3 +62,22 @@ class TreatmentViewSet(viewsets.ModelViewSet):
         # 9. `Treatment` 객체를 직렬화하여 응답 데이터를 생성
         serializer = self.get_serializer(treatment)
         return Response(serializer.data)
+    
+    # treatments/{treatmentId}/acceptTreatment/
+    @action(detail = True, methods=['POST'])
+    def acceptTreatment(self, request, pk=None):
+        treatment = self.get_object() #treatmentId로 treatment객체 가져오기
+        
+        #rezExpirationDate 필드를 datetime 객체로 변환
+        rezExpirationDate = datetime.strptime(treatment.rezExpirationDate, '%Y-%m-%d %H:%M:%S')
+        
+        #현재 시간과 진료요청 만료시간비교 * 의사 또는 간호사가 보는용
+        if rezExpirationDate < datetime.now():
+            return Response({"message": "진료 수락기간이 만료되었습니다."})
+        
+        #isAccepted를 True로 변경
+        treatment.isAccepted = True
+        treatment.save()
+        
+        serializer = self.get_serializer(treatment)
+        return Response(serializer.data)
