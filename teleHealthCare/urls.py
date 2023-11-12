@@ -21,6 +21,6 @@ from django.urls import path, include #include 추가한거임
 urlpatterns = [
     path('admin/', admin.site.urls), #기본 설정
     path('',include('patients.urls')), #patients app의 urls.py를 include한 것임
-    path('',include('doctors.urls')) #patients app의 urls.py를 include한 것임
-
+    path('',include('doctors.urls')), #patients app의 urls.py를 include한 것임
+    path('',include('treatments.urls')) #treatments app의 urls.py를 include한 것임
 ]

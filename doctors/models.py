@@ -6,7 +6,7 @@ from django.contrib.postgres.fields import ArrayField
 # Create your models here.
     
 class Doctor(models.Model):
-    #doctorId, hospital(병원명), doctorName(의사명)
+    #doctorId, hospital(병원명), name(의사명)
     #department(진료과, 여러개 입력가능), selfPayDepartment(비급여진료과, 여러개 입력가능)
     # 시간 입력방식
     #영업시간란 : 월~금:오전9시~오후7시, 토:오전9시~오후1시
@@ -18,7 +18,7 @@ class Doctor(models.Model):
     
     doctorId = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     hospital = models.CharField(max_length=50, null=False,blank=False)
-    doctorName = models.CharField(max_length=17, null=False,blank=False)
+    name = models.CharField(max_length=17, null=False,blank=False)
     department = models.TextField(null=False,blank=False)
     department_selfPay = models.TextField(null=False,blank=False)
     #사용자에게 입력받는 방식 :
