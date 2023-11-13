@@ -197,5 +197,5 @@
 
 <details>
 <summary>ERD image</summary>
-  ![image](https://github.com/backEndKwon/teleHealthCare/assets/128948886/9bd1ff25-0ff0-4cc2-be01-82e05e1bd3ee)
+  <img src="https://github.com/backEndKwon/teleHealthCare/assets/128948886/9bd1ff25-0ff0-4cc2-be01-82e05e1bd3ee" alt="ERD image">
 </details>
