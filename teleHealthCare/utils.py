@@ -12,12 +12,12 @@ def convertTimeFormat(time):
 
 #doctor api에 사용
 #입력한 시간이 의사의 영업시간 내에 있는지 확인
-def isWithinWorkingHours_doctor(self, user_time, working_hours, lunch_hours):
+def isWithinWorkingHours_doctor(user_time, working_hours, lunch_hours):
     if '휴무' in working_hours:
         return False
     #~로 구분된 시간을 24시간 형식으로 변환
-    working_start, working_end = [int(self.convertTimeFormat(t)) for t in working_hours.split('~')]
-    lunch_start, lunch_end = [int(self.convertTimeFormat(t)) for t in lunch_hours.split('~')]
+    working_start, working_end = [int(convertTimeFormat(t)) for t in working_hours.split('~')]
+    lunch_start, lunch_end = [int(convertTimeFormat(t)) for t in lunch_hours.split('~')]
     # 유효한 시간 : 일하는 시간 <= 신청한 시간 < 점심시간 또는 점심시간 <= 신청한 시간 < 일하는 시간
     return (working_start <= user_time < lunch_start or lunch_end <= user_time < working_end)
 
