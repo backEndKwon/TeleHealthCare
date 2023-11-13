@@ -19,6 +19,10 @@ class TreatmentViewSet(viewsets.ModelViewSet):
         patientId = request.data.get('patientId')
         doctorId = request.data.get('doctorId')
         rezDateStr = request.data.get('rezDate')
+        
+        #입력값 입력여부 확인
+        if not patientId or not doctorId or not rezDateStr:
+            return Response({'message': 'patientId, doctorId, rezDateStr 중 하나 이상이 누락되었습니다.'})
 
         # 2. `patient`와 `doctor` 객체를 DB에서 가져옴
         patient = Patient.objects.filter(pk=patientId).first()

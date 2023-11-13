@@ -45,7 +45,9 @@ class DoctorViewSet(viewsets.ModelViewSet):
             userTime = datetimeObj.time().hour
 
             doctors = Doctor.objects.all()
-            print("doctors==> ", doctors)
+            if not doctors: #의사 정보 없으면 에러메세지 반환
+                return Response({"message": "검색 결과가 없습니다."})
+
             availableDoctors = [doctor for doctor in doctors if isWithinWorkingHours_doctor(userTime, doctor.time_business.split('/')[weekday], doctor.time_lunch)]
             if not availableDoctors:
                 return Response({"message": "입력한 시간에 영업 중인 의사를 찾을 수 없습니다."})
